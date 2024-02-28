@@ -9,12 +9,15 @@ import 'react-native-gesture-handler';
 
 import Login from './screens/Login';
 import Frontpage from './screens/Frontpage';
-import CreateUser from './screens/CreateUser';
+//import CreateUser from './screens/CreateUser';
+import TestCreateUser2 from './screens/TestCreateUser2';
+import { firestore,  } from './firebase/Config';
 
 
 export default function App() {
 
   const Stack = createStackNavigator();
+  const InsideStack = createStackNavigator(); //Tällä saadaan jotekin sisäistä navigointia aikaiseksi
 
   return (
     <PaperProvider>
@@ -38,11 +41,11 @@ export default function App() {
           }}
           />
           <Stack.Screen
-          name="CreateUser"
-          component={CreateUser}
+          name="TestCreateUser"
+          component={TestCreateUser2}
           options = {{
-            title: 'CreateUser',
-            headerTitle: 'CreateUser'
+            title: 'TestCreateUser2',
+            headerTitle: 'TestCreateUser2'
           }}
           />
     </Stack.Navigator>

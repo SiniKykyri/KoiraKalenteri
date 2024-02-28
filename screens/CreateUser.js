@@ -132,6 +132,7 @@ export default function CreateUser(){
     )
 }
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

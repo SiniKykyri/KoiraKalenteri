@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import {AntDesign} from '@expo/vector-icons'; //Muista myös FontAwesome vaihtoehtona
 
+
 export default function Frontpage({navigation}){
 
     useLayoutEffect(() => {
@@ -15,6 +16,14 @@ export default function Frontpage({navigation}){
                 name = "user"
                 size={24}
                 onPress={() => navigation.navigate('Login')}
+                />
+            ),
+            headerLeft: () => (
+                <AntDesign 
+                style={styles.navButton}
+                name = "user"
+                size={24}
+                onPress={() => navigation.navigate('TestCreateUser')}
                 />
             )
         })
