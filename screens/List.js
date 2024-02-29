@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import {FIREBASE_AUTH} from '../firebase/Config';
 
-const List = () => {
+
+const List = ({navigation}) => {
   return (
     <View>
-      <Text>List Component</Text>
+      <Button onPress = {() => navigation.navigate('Details')} title = 'Open details' />
+      <Button onPress = {() => FIREBASE_AUTH.signOut()} title = 'Logout' />
     </View>
   );
 };
