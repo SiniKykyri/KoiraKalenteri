@@ -1,35 +1,44 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import {AntDesign} from '@expo/vector-icons'; //Muista myös FontAwesome vaihtoehtona
+import Login from './Login';
+import {User, onAuthStateChanged} from 'firebase/auth'
+import { FIREBASE_AUTH } from '../firebase/Config';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function Frontpage({navigation}){
+
+  const [user, setUser] = useState(null) // Tilamuuttuja käyttäjälle
+
+  // Tämä useEffect hoitaa käyttäjän tilan päivityksen
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      console.log('User', user)
+      setUser(user)
+    })
+  }, [])
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerStyle: {
                 backgroundColor: '#0E9494'
             },
-            headerRight: () => (
-                <AntDesign 
-                style={styles.navButton}
-                name = "user"
-                size={24}
-                onPress={() => navigation.navigate('Login')}
-                />
-            ),
-            headerLeft: () => (
-                <AntDesign 
-                style={styles.navButton}
-                name = "user"
-                size={24}
-                onPress={() => navigation.navigate('TestCreateUser')}
-                />
+          
+            headerRight: () => ( 
+                <TouchableOpacity
+                    style={styles.navButton}
+                    onPress={() => navigation.navigate( user ? 'List' : 'Login' )}
+                >
+                    <AntDesign
+                    name ={user ? 'logout' : 'login'}
+                    size={24}
+                    />
+                    <Text style={styles.buttonText}>{user ? 'Logout' : 'Login'}</Text>
+                </TouchableOpacity>
             )
         })
-    }, [])
-
-
+    }, [user])
 
     return(
         <View style={styles.container}>
@@ -49,7 +58,17 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     navButton: {
-        marginRight: 5,
-        padding: 5
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginRight:5
+    },
+    buttonText: {
+        fontSize: 12,
+        textAlign: 'center',
+        alignItems: 'center'
+     
+
+      
+   
     }
 })

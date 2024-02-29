@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {getFirestore, collection, addDoc, serverTimestamp, query, onSnapshot, doc, orderBy} from 'firebase/firestore';
-import {getAuth, signOut} from 'firebase/auth'
+import {getAuth} from 'firebase/auth'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,7 +35,7 @@ export {
     orderBy,
     FIREBASE_APP,
     FIREBASE_AUTH,
-    signOut
+
 
 }
 
