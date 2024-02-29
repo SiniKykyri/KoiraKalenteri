@@ -31,10 +31,10 @@ export default function Frontpage({navigation}){
                     onPress={() => navigation.navigate( user ? 'List' : 'Login' )}
                 >
                     <AntDesign
-                    name ={user ? 'logout' : 'login'}
+                    name ={user ? 'user' : 'login'}
                     size={24}
                     />
-                    <Text style={styles.buttonText}>{user ? 'Logout' : 'Login'}</Text>
+                    <Text style={styles.buttonText}>{user ? 'username' : 'Login'}</Text>
                 </TouchableOpacity>
             )
         })

@@ -65,6 +65,14 @@ export default function App() {
             headerTitle: 'List',
           }}
           />
+          <Stack.Screen
+          name="Details"
+          component={Details}
+          options = {{
+            title: 'Details',
+            headerTitle: 'Details',
+          }}
+          />
     </Stack.Navigator>
     </NavigationContainer>
     </PaperProvider>

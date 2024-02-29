@@ -34,11 +34,13 @@ const Login = ({navigation}) => {
             const response = await createUserWithEmailAndPassword(auth, email, password)
             console.log(response)
             alert('Check your email for verification')
+            setIsLoggedIn(true)
         } catch (error) {
             console.log(error)
             alert('Something went wrong creating user')
         }finally{
             setLoading(false)
+
         }
     }
 
