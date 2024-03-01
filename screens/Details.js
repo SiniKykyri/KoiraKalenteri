@@ -7,18 +7,23 @@ import { Avatar, TextInput } from 'react-native-paper';
 import { updateProfile } from 'firebase/auth';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome } from '@expo/vector-icons';
+import Profilepicture from '../components/Profilepicture';
+
+
 
 const Details = () => {
 
     const user = FIREBASE_AUTH.currentUser
     const displayname = user.displayName
     const [newdisplayName,setNewDisplayName] = useState(" ")
+    const [isEditingDisplayName, setIsEditingDisplayName] = useState(false);
     const email = user.email
-    const profilepicture = user.photoURL        
-
+  
     console.log("tämä on nimi:",displayname)
     console.log("tämä on email:",email)
 
+
+    //Päivitetään käyttäjä nimi firebasiin
     const handleUpdate = () => {
         updateProfile(user, {displayName: newdisplayName})
         .then(() => {
@@ -30,30 +35,15 @@ const Details = () => {
             console.log('Error updating profile', error)
         })
     }
-
-
-    // Chat koodia
-    const [isEditingDisplayName, setIsEditingDisplayName] = useState(false);
-  
-
-
-    const handleSaveDisplayName = () => {
-        // Tallenna uusi käyttäjänimi
-        setIsEditingDisplayName(false);
-        // Tässä voit kutsua sopivaa toimintoa tallentamaan uuden käyttäjänimen
-    };
-
+    // Muuttuja käyttäjänimen muokkaamiseen
     const handleEditDisplayName = () => {
         setIsEditingDisplayName(true);
         setNewDisplayName(displayname);
     };
 
-
   return (
     <View>
-        <View style={styles.profilepictureContainer}>
-            {profilepicture ? <Image source={{uri: profilepicture}} style={styles.profilepicture} /> : <Avatar.Icon size={150} icon="account" />}
-        </View>
+        <Profilepicture />
         <View style = {styles.infoContainer}>
             <Text style={styles.header}>User information</Text>
             <TouchableOpacity onPress={handleEditDisplayName} style={styles.row}>
@@ -68,19 +58,21 @@ const Details = () => {
                     style={styles.input}
                     value={newdisplayName}
                     onChangeText={setNewDisplayName}
-                    onBlur={handleUpdate}
+                    onBlur={handleUpdate }
                     autoFocus
                 />
             )}
         </View>
-     
+        <View style = {styles.infoContainer}>
+            <TouchableOpacity onPress={handleEditDisplayName} style={styles.row}>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.infoLabel}>Email:</Text>
+                        <Text style={styles.info}>{email}</Text>
+                    </View> 
+            </TouchableOpacity>
+        </View>
     
-        <Button title = 'Update' onPress = {handleUpdate} />
-        <Text style={styles.info}>Email: {email} </Text>
-
-
-
-
+    
     </View>
   );
 };
@@ -156,6 +148,7 @@ const styles = StyleSheet.create({
     },
     profilepicture: {
         width: 150,
-        height: 150
+        height: 150,
+        marginBottom: 20,
     }
 })

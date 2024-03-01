@@ -14,8 +14,6 @@ export default function MainAppbar(props){
     );
 }
 
-// Keksi jokin parempi ratkaisu kuin negatiivinen margini
-
 const styles = StyleSheet.create({
     appbarContainer: {
         marginTop: 0,
