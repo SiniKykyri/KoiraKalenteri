@@ -11,18 +11,6 @@ import Details from './screens/Details';
 
 export default function App() {
 
-  
-  //Siirretty frontpageen
-  /*const [user, setUser] = useState(null) // Tilamuuttuja käyttäjälle
-
-  // Tämä useEffect hoitaa käyttäjän tilan päivityksen
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log('User', user)
-      setUser(user)
-    })
-  }, [])*/
-
   // Tässä on nyt nuo navigointi jutut
   const Stack = createStackNavigator();
   const InsideStack = createStackNavigator(); //Tällä saadaan jotekin sisäistä navigointia aikaiseksi
@@ -62,7 +50,7 @@ export default function App() {
           component={List}
           options = {{
             title: 'List',
-            headerTitle: 'List',
+            headerTitle: 'Menu',
           }}
           />
           <Stack.Screen

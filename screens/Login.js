@@ -1,12 +1,13 @@
-import {View, Text, StyleSheet, Button, KeyboardAvoidingView} from 'react-native';
+import { View, Text, StyleSheet, Button, KeyboardAvoidingView } from 'react-native';
 import React from 'react';
 import { useState } from 'react';
 import { FIREBASE_AUTH } from '../firebase/Config';
 import { ActivityIndicator, TextInput } from 'react-native-paper';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { FontAwesome } from '@expo/vector-icons';
 
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -23,7 +24,7 @@ const Login = ({navigation}) => {
         } catch (error) {
             console.log(error)
             alert('Something went wrong')
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -38,9 +39,8 @@ const Login = ({navigation}) => {
         } catch (error) {
             console.log(error)
             alert('Something went wrong creating user')
-        }finally{
+        } finally {
             setLoading(false)
-
         }
     }
 
@@ -48,21 +48,46 @@ const Login = ({navigation}) => {
         navigation.navigate('Frontpage')
     }
 
-
-    return(
+    return (
         <View style={styles.container}>
-            <KeyboardAvoidingView behavior='padding'> 
-            {/* Tämä on tärkeä jotta näppäimistö ei peitä input kenttiä */}
-            <TextInput value={email} style = {styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text)=> setEmail(text)}></TextInput>
-            <TextInput secureTextEntry = {true} value={password} style = {styles.input} placeholder='Password' autoCapitalize='none' onChangeText={(text)=> setPassword(text)}></TextInput>
-            {loading ? (
-            <ActivityIndicator size='large' color='blue'/>
-            ): (
-            <>
-                <Button title = 'Login' onPress = {singIn}></Button>
-                <Button title = 'Create account' onPress = {singUp}></Button>
-            </>
-            )}
+            <KeyboardAvoidingView behavior='padding'>
+                {/* Tämä on tärkeä jotta näppäimistö ei peitä input kenttiä */}
+                <TextInput value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
+                <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
+                {loading ? (
+                    <ActivityIndicator size='large' color='blue' />
+                ) : (
+                    <>
+                        <FontAwesome.Button 
+                        name = "sign-in"
+                        size={24}
+                        textAlign='center'
+                        color={'black'}
+                        borderRadius={8}
+                        marginVertical={20}
+                        backgroundColor= 'transparent'
+                        title='Login' onPress={singIn}
+                        justifyContent='center'
+                        alignItems='center'
+                        style={styles.button}>
+                            Kirjaudu sisään
+                        </FontAwesome.Button>
+
+                        <FontAwesome.Button 
+                        name = "user-plus"
+                        borderRadius={8}
+                        backgroundColor= 'transparent'
+                        marginVertical={20}
+                        textAlign='center'
+                        justifyContent='center'
+                        color={'black'}
+                        style={styles.button} 
+                        title='Create account' 
+                        onPress={singUp}>
+                            Luo käyttäjä
+                        </FontAwesome.Button>
+                    </>
+                )}
             </KeyboardAvoidingView>
         </View>
     )
@@ -75,7 +100,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         flex: 1,
         justifyContent: 'center',
-     
+    
     },
     input: {
         marginVertical: 4,
@@ -84,7 +109,6 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         padding: 10,
         backgroundColor: 'white'
-   
-     
-    }
+    },
+
 })

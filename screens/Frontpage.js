@@ -1,8 +1,7 @@
 import React, { useLayoutEffect, useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import {StyleSheet, View, Text } from 'react-native';
 import {AntDesign} from '@expo/vector-icons'; //Muista myös FontAwesome vaihtoehtona
-import Login from './Login';
-import {User, onAuthStateChanged} from 'firebase/auth'
+import {onAuthStateChanged} from 'firebase/auth'
 import { FIREBASE_AUTH } from '../firebase/Config';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -60,12 +59,14 @@ const styles = StyleSheet.create({
     navButton: {
         flexDirection: 'column',
         alignItems: 'center',
-        marginRight:5
+        marginRight:10,
+        padding: 10
     },
     buttonText: {
         fontSize: 12,
         textAlign: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight:5
      
 
       

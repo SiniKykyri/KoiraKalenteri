@@ -4,6 +4,7 @@ import { FIREBASE_AUTH } from '../firebase/Config';
 import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome } from '@expo/vector-icons';
+import { updateProfile } from 'firebase/auth';
 
 export default function UserInfo({ navigation }) {
 
@@ -18,6 +19,7 @@ export default function UserInfo({ navigation }) {
         updateProfile(user, { displayName: newdisplayName })
             .then(() => {
                 alert('Profile updated')
+                setIsEditingDisplayName(false)
                 console.log('Profile updated')
             })
             .catch((error) => {
