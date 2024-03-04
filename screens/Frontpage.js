@@ -34,7 +34,7 @@ export default function Frontpage({navigation}){
                     name ={user ? 'user' : 'login'}
                     size={24}
                     />
-                    <Text style={styles.buttonText}>{user ? 'username' : 'Login'}</Text>
+                    <Text style={styles.buttonText}>{user ? user.displayName : 'Login'}</Text>
                 </TouchableOpacity>
             )
         })
